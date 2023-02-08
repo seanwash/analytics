@@ -12,7 +12,6 @@ class PageViewFactory extends Factory
     public function definition(): array
     {
         return [
-            'sid' => $this->faker->uuid(),
             'host' => $this->faker->domainName(),
             'screen_size' => "{$this->faker->numberBetween(100, 2000)}x{$this->faker->numberBetween(100, 2000)}",
             'country_code' => $this->faker->countryCode(),
