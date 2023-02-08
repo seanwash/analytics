@@ -11,6 +11,8 @@ class PageView extends Model
 {
     use HasFactory, HasUuids;
 
+    protected static $unguarded = true;
+
     public function website(): BelongsTo
     {
         return $this->belongsTo(Website::class);
