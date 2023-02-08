@@ -2,22 +2,28 @@
 
 namespace Database\Seeders;
 
+use App\Models\PageView;
+use App\Models\User;
+use App\Models\Website;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $user = User::factory()->create([
+            'name' => 'Sean Washington',
+            'email' => 'hello@seanwash.com',
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Website::factory()
+            ->for($user)
+            ->has(PageView::factory()->count(100), 'pageViews')
+            ->create([
+                'domain' => 'seanwash.com',
+            ]);
     }
 }
