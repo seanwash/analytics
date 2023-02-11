@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import sveltePreprocess from 'svelte-preprocess';
+import * as path from 'path';
 
 export default defineConfig({
     plugins: [
@@ -16,4 +17,9 @@ export default defineConfig({
             preprocess: [sveltePreprocess({ typescript: true })],
         }),
     ],
+    resolve: {
+        alias: {
+            ziggy: path.resolve('vendor/tightenco/ziggy/src/js'),
+        },
+    },
 });

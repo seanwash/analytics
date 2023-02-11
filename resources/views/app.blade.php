@@ -6,6 +6,7 @@
 
         <title>{{ config('app.name') }}</title>
 
+        @routes
         @vite(['resources/js/app.ts', 'resources/css/app.css'])
 
         @inertiaHead

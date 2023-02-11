@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             ->for($user)
             ->has(PageView::factory()->count(100), 'pageViews')
             ->create([
-                'domain' => 'seanwash.com',
+                'domain' => 'https://seanwash.com',
             ]);
     }
 }

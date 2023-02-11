@@ -12,7 +12,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('website_id')->constrained()->cascadeOnDelete();
 
-            $table->string('sid');
+            $table->string('session_id');
             $table->string('host');
             $table->string('screen_size');
             $table->string('country_code');

@@ -24,6 +24,7 @@
         "vite": "^4.1.1"
     },
     "dependencies": {
-        "@inertiajs/svelte": "^1.0.0"
+        "@inertiajs/svelte": "^1.0.0",
+        "ziggy": "file:./vendor/tightenco/ziggy/dist"
     }
 }
