@@ -1,9 +1,14 @@
 <script lang="ts">
+    import { onMount, onDestroy } from "svelte";
+    import { router } from "@inertiajs/svelte";
+
     export let website: App.Data.WebsiteData;
     export let liveSessionCount: number;
     export let sessionCount: number;
     export let pageviewCount: number;
     export let pageviews: App.Data.PageViewData[];
+
+    let intervalId;
 
     const timeFormat = new Intl.DateTimeFormat("en-US", {
         year: "numeric",
@@ -25,6 +30,19 @@
     function formattedNumber(number: number) {
         return numberFormat.format(number);
     }
+
+    onMount(() => {
+        intervalId = setInterval(
+            () => {
+                router.reload();
+            },
+            300_000, // 5 minutes
+        );
+    });
+
+    onDestroy(() => {
+        clearInterval(intervalId);
+    });
 </script>
 
 <div class="container mx-auto space-y-12">
