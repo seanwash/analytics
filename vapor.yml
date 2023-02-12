@@ -3,6 +3,7 @@ name: analytics
 environments:
   production:
     domain: analytics.seanwash.com
+    asset-domain: assets.analytics.seanwash.com
     memory: 1024
     cli-memory: 512
     database: analytics-production
