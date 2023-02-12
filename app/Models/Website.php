@@ -12,6 +12,8 @@ class Website extends Model
 {
     use HasFactory, HasUuids;
 
+    protected static $unguarded = true;
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
