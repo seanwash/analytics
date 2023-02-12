@@ -6,6 +6,8 @@
 
         <title>{{ config('app.name') }}</title>
 
+        <x-favicon />
+
         @routes
         @vite(['resources/js/app.ts', 'resources/css/app.css'])
 
