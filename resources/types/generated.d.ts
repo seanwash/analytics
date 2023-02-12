@@ -8,6 +8,8 @@ declare namespace App.Data {
         country_code: string;
         screen_size: string;
         user_agent: string;
+        created_at: string;
+        updated_at: string;
     };
     export type WebsiteData = {
         id: string;

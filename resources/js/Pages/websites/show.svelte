@@ -4,42 +4,64 @@
     export let sessionCount: number;
     export let pageviewCount: number;
     export let pageviews: App.Data.PageViewData[];
+
+    const timeFormat = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
+        timeZone: "America/Los_Angeles",
+    });
+
+    function formattedDate(date: string) {
+        return timeFormat.format(new Date(date));
+    }
+
+    const numberFormat = new Intl.NumberFormat("en-US");
+
+    function formattedNumber(number: number) {
+        return numberFormat.format(number);
+    }
 </script>
 
-<h1>{website.domain}</h1>
+<div class="container mx-auto space-y-12">
+    <h1>{website.domain}</h1>
 
-<div class="flex items-center space-x-4 mt-4">
-    <div>
-        <p>Live Sessions</p>
-        <p>{liveSessionCount}</p>
+    <div class="flex items-center space-x-12">
+        <div>
+            <p><span class="block text-3xl">{formattedNumber(liveSessionCount)}</span> Live Sessions</p>
+        </div>
+
+        <div>
+            <p><span class="block text-3xl">{formattedNumber(sessionCount)}</span> Sessions</p>
+        </div>
+
+        <div>
+            <p><span class="block text-3xl">{formattedNumber(pageviewCount)}</span> Page Views</p>
+        </div>
     </div>
 
-    <div>
-        <p>Sessions</p>
-        <p>{sessionCount}</p>
-    </div>
-
-    <div>
-        <p>Page Views</p>
-        <p>{pageviewCount}</p>
-    </div>
-</div>
-
-<table class="table-auto border-collapse border border-slate-400 mt-4">
-    <thead>
-        <tr>
-            <th class="border border-slate-300">Path</th>
-            <th class="border border-slate-300">Country Code</th>
-            <th class="border border-slate-300">Screen Size</th>
-        </tr>
-    </thead>
-    <tbody>
-        {#each pageviews as page}
+    <table class="w-full table-auto border-collapse border border-neutral-400">
+        <thead>
             <tr>
-                <td class="border border-slate-300">{page.path}</td>
-                <td class="border border-slate-300">{page.country_code}</td>
-                <td class="border border-slate-300">{page.screen_size}</td>
+                <th class="border border-neutral-400 p-4 text-left">Path</th>
+                <th class="border border-neutral-400 p-4 text-left">Country Code</th>
+                <th class="border border-neutral-400 p-4 text-left">Screen Size</th>
+                <th class="border border-neutral-400 p-4 text-left">Date</th>
             </tr>
-        {/each}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {#each pageviews as page}
+                <tr>
+                    <td class="border border-neutral-400 p-4">{page.path}</td>
+                    <td class="border border-neutral-400 p-4">{page.country_code}</td>
+                    <td class="border border-neutral-400 p-4">{page.screen_size}</td>
+                    <td class="border border-neutral-400 p-4">{formattedDate(page.created_at)}</td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>
+</div>

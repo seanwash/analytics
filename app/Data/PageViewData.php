@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use Carbon\Carbon;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
@@ -17,6 +18,8 @@ class PageViewData extends Data
         public string $country_code,
         public string $screen_size,
         public string $user_agent,
+        public readonly Carbon $created_at,
+        public readonly Carbon $updated_at,
     ) {
     }
 }
