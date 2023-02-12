@@ -11,7 +11,7 @@
 
         @inertiaHead
     </head>
-    <body class='bg-sky-100 text-black dark:bg-sky-900 dark:text-white'>
+    <body class="p-8 bg-sky-100 text-black dark:bg-sky-900 dark:text-white">
         @inertia
 
         <div id="app"></div>

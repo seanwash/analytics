@@ -5,6 +5,7 @@ declare namespace App.Data {
         website_id: string;
         host: string;
         path: string;
+        country_code: string;
         screen_size: string;
         user_agent: string;
     };

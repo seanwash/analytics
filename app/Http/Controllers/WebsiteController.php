@@ -20,16 +20,14 @@ class WebsiteController extends Controller
     public function show(Website $website)
     {
         $liveSessionCount = $website->pageviews()
-            ->select('session_id')
-            ->distinct()
             ->where('created_at', '>=', now()->subMinutes(5))
-            ->count();
+            ->distinct()
+            ->count('session_id');
 
         $sessionCount = $website->pageviews()
-            ->select('session_id')
-            ->distinct()
             ->where('created_at', '>=', now()->subDays(30))
-            ->count();
+            ->distinct()
+            ->count('session_id');
 
         $pageViewCount = $website->pageviews()
             ->where('created_at', '>=', now()->subDays(30))
@@ -40,7 +38,9 @@ class WebsiteController extends Controller
             'liveSessionCount' => $liveSessionCount,
             'sessionCount' => $sessionCount,
             'pageviewCount' => $pageViewCount,
-            'pageviews' => $website->pageviews()->latest()->limit(50)->get(),
+            'pageviews' => PageViewData::collection(
+                $website->pageviews()->latest()->limit(50)->get()
+            ),
         ]));
     }
 }

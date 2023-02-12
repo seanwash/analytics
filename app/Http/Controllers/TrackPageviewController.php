@@ -18,20 +18,19 @@ class TrackPageviewController extends Controller
         $validated = $request->validate([
             'h' => ['required', 'string', 'max:255'],
             'p' => ['required', 'string', 'max:255'],
-            'cc' => ['required', 'string', 'max:3'],
             'ss' => ['required', 'string', 'max:255'],
-            'ua' => ['required', 'string', 'max:255'],
+            'cc' => ['required', 'string', 'max:255'],
         ]);
 
         $website
             ->pageViews()
             ->create([
-                'session_id' => $request->session()->getId(),
+                'session_id' => sha1($request->ip().$request->userAgent().$website->id),
+                'user_agent' => $request->userAgent(),
                 'host' => $validated['h'],
                 'path' => $validated['p'],
                 'country_code' => $validated['cc'],
                 'screen_size' => $validated['ss'],
-                'user_agent' => $validated['ua'],
             ]);
 
         return response()->noContent(201);

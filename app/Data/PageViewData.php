@@ -14,6 +14,7 @@ class PageViewData extends Data
         public string $website_id,
         public string $host,
         public string $path,
+        public string $country_code,
         public string $screen_size,
         public string $user_agent,
     ) {
