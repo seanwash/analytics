@@ -1,3 +1,5 @@
+# https://phpstan.org/config-reference
+
 includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 
@@ -8,10 +10,8 @@ parameters:
 
     level: 9
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
-#
-#    checkMissingIterableValueType: false
+    ignoreErrors:
+        -
+            message: '#has no return type specified#'
+            paths:
+                - app/Http/Controllers/*
