@@ -25,7 +25,7 @@ class TrackPageviewController extends Controller
         $website
             ->pageViews()
             ->create([
-                'session_id' => sha1($request->ip().$request->userAgent().$website->id),
+                'session_id' => sha1($request->ip() . $request->userAgent() . $website->id),
                 'user_agent' => $request->userAgent(),
                 'host' => $validated['h'],
                 'path' => $validated['p'],
