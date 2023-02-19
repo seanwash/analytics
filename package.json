@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@inertiajs/svelte": "^1.0.0",
+        "chart.js": "^4.2.1",
         "ziggy": "file:./vendor/tightenco/ziggy/dist"
     }
 }

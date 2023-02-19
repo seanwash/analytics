@@ -1,14 +1,17 @@
 <script lang="ts">
     import { onMount, onDestroy } from "svelte";
     import { router } from "@inertiajs/svelte";
+    import Chart from "chart.js/auto";
 
     export let website: App.Data.WebsiteData;
+    export let chart;
     export let liveSessionCount: number;
     export let sessionCount: number;
     export let pageviewCount: number;
     export let pageviews: App.Data.PageViewData[];
 
     let intervalId;
+    let chartEl;
 
     const timeFormat = new Intl.DateTimeFormat("en-US", {
         year: "numeric",
@@ -32,6 +35,19 @@
     }
 
     onMount(() => {
+        new Chart(chartEl, {
+            type: "line",
+            data: {
+                labels: chart.map((item) => item.date),
+                datasets: [
+                    {
+                        label: "Views",
+                        data: chart.map((item) => ({ x: item.date, y: item.views })),
+                    },
+                ],
+            },
+        });
+
         intervalId = setInterval(
             () => {
                 router.reload();
@@ -61,6 +77,8 @@
             <p><span class="block text-3xl">{formattedNumber(pageviewCount)}</span> Page Views</p>
         </div>
     </div>
+
+    <canvas bind:this={chartEl} />
 
     <table class="w-full table-auto border-collapse border border-neutral-400">
         <thead>

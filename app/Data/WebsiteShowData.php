@@ -12,6 +12,7 @@ class WebsiteShowData extends Data
 {
     public function __construct(
         public WebsiteData $website,
+        public $chart,
         public int $liveSessionCount,
         public int $sessionCount,
         public int $pageviewCount,
