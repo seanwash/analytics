@@ -2,7 +2,7 @@
 module.exports = {
     content: [
         './resources/views/app.blade.php',
-        './resources/js/**/*.svelte',
+        './resources/js/**/*.tsx',
     ],
     theme: {
         extend: {},

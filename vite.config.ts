@@ -1,21 +1,15 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
-import { svelte } from "@sveltejs/vite-plugin-svelte";
-import sveltePreprocess from "svelte-preprocess";
+import react from "@vitejs/plugin-react";
 import * as path from "path";
 
 export default defineConfig({
     plugins: [
-        // https://github.com/laravel/vite-plugin/pull/189
-        // @ts-ignore
-        laravel.default({
-            input: ["resources/css/app.css", "resources/js/app.ts"],
+        laravel({
+            input: ["resources/css/app.css", "resources/js/app.tsx"],
             refresh: true,
         }),
-        svelte({
-            prebundleSvelteLibraries: true,
-            preprocess: [sveltePreprocess({ typescript: true })],
-        }),
+        react(),
     ],
     resolve: {
         alias: {

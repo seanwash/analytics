@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name') }}</title>
+        <title inertia>{{ config('app.name') }}</title>
 
         <x-favicon />
 
         @routes
-        @vite(['resources/js/app.ts', 'resources/css/app.css'])
+        @vite(['resources/css/app.css', 'resources/js/app.tsx'])
 
         @inertiaHead
     </head>
