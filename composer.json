@@ -11,8 +11,6 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "laravel/vapor-core": "^2.22",
-        "laravel/vapor-ui": "^1.7",
         "spatie/enum": "^3.13",
         "spatie/laravel-data": "^3.0",
         "spatie/laravel-ray": "^1.32",
