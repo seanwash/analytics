@@ -6,36 +6,36 @@
         sessionStorage.lastPathName = pathname;
 
         send([
-            { name: 'h', value: `${protocol}//${host}` },
-            { name: 'p', value: pathname },
+            { name: "h", value: `${protocol}//${host}` },
+            { name: "p", value: pathname },
         ]);
     }
 
     function send(params) {
-        if (localStorage.disableAnalytics === 'true') {
-            console.log('Analytics disabled', params);
+        if (localStorage.disableAnalytics === "true") {
+            console.log("Analytics disabled", params);
         }
 
-        params.push({ name: 'ss', value: screensize() });
-        params.push({ name: 'cc', value: Intl.DateTimeFormat().resolvedOptions().timeZone });
+        params.push({ name: "ss", value: screensize() });
+        params.push({ name: "tz", value: Intl.DateTimeFormat().resolvedOptions().timeZone });
 
-        const qs = params.map((v) => `${v.name}=${encodeURIComponent(v.value)}`).join('&');
+        const qs = params.map((v) => `${v.name}=${encodeURIComponent(v.value)}`).join("&");
         const url = `${scriptOrigin()}/t/${website()}?${qs}`;
 
         fetch(url, {
-            mode: 'no-cors',
+            mode: "no-cors",
             headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
+                "Content-Type": "application/json",
+                Accept: "application/json",
             },
-        }).catch((err) => console.log('Error:', err));
+        }).catch((err) => console.log("Error:", err));
     }
 
     let _script = null;
 
     function script() {
         if (!_script) {
-            _script = document.querySelector('script[data-website]');
+            _script = document.querySelector("script[data-website]");
         }
         return _script;
     }
@@ -47,12 +47,12 @@
     }
 
     function website() {
-        return script().getAttribute('data-website');
+        return script().getAttribute("data-website");
     }
 
     function scriptOrigin() {
         return script()
-            .getAttribute('src')
+            .getAttribute("src")
             .match(/https:\/\/[^/]*/)[0];
     }
 

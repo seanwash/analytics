@@ -27,7 +27,7 @@ it('creates a new PageView', function () {
     trackPageview($website, [
         'h' => $pageView->host,
         'p' => $pageView->path,
-        'cc' => $pageView->country_code,
+        'tz' => fake()->timezone($pageView->country_code),
         'ss' => $pageView->screen_size,
         'ua' => $pageView->user_agent,
     ])->assertCreated();
@@ -47,7 +47,7 @@ it('validates the host input matches a website domain', function () {
     trackPageview($website, [
         'h' => $pageView->host,
         'p' => $pageView->path,
-        'cc' => $pageView->country_code,
+        'tz' => fake()->timezone($pageView->country_code),
         'ss' => $pageView->screen_size,
         'ua' => $pageView->user_agent,
     ])->assertForbidden();
