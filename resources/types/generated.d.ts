@@ -11,6 +11,10 @@ declare namespace App.Data {
         created_at: string;
         updated_at: string;
     };
+    export type RollupData = {
+        value: string;
+        count: number;
+    };
     export type WebsiteData = {
         id: string;
         domain: string;
@@ -19,9 +23,12 @@ declare namespace App.Data {
     };
     export type WebsiteShowData = {
         website: App.Data.WebsiteData;
+        chart: any;
         liveSessionCount: number;
         sessionCount: number;
         pageviewCount: number;
-        pageviews: any;
+        paths: Array<App.Data.RollupData>;
+        countries: Array<App.Data.RollupData>;
+        screenSizes: Array<App.Data.RollupData>;
     };
 }

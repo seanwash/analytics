@@ -2,12 +2,10 @@
 
 namespace App\Data;
 
-use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
-use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
-#[TypeScript]
+/** @typescript */
 class WebsiteShowData extends Data
 {
     public function __construct(
@@ -16,8 +14,15 @@ class WebsiteShowData extends Data
         public int $liveSessionCount,
         public int $sessionCount,
         public int $pageviewCount,
-        #[DataCollectionOf(PageViewData::class)]
-        public DataCollection $pageviews,
+
+        /** @var DataCollection<RollupData> */
+        public DataCollection $paths,
+
+        /** @var DataCollection<RollupData> */
+        public DataCollection $countries,
+
+        /** @var DataCollection<RollupData> */
+        public DataCollection $screenSizes,
     ) {
     }
 }

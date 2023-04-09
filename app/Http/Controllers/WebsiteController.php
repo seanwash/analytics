@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\PageViewData;
+use App\Data\RollupData;
 use App\Data\WebsiteData;
 use App\Data\WebsiteShowData;
 use App\Models\Website;
@@ -37,6 +37,7 @@ class WebsiteController extends Controller
             ->count();
 
         $viewCounts = DB::table('page_views')
+            ->where('website_id', $website->id)
             ->select(
                 DB::raw('DATE(created_at) as date'),
                 DB::raw('count(*) as views')
@@ -54,15 +55,39 @@ class WebsiteController extends Controller
             ];
         });
 
+        $paths = DB::table('page_views')
+            ->where('website_id', $website->id)
+            ->select(DB::raw('path as value'), DB::raw('count(*) as count'))
+            ->groupBy('value')
+            ->orderBy('count', 'desc')
+            ->limit(10)
+            ->get();
+
+        $countries = DB::table('page_views')
+            ->where('website_id', $website->id)
+            ->select(DB::raw('country_code as value'), DB::raw('count(*) as count'))
+            ->groupBy('value')
+            ->orderBy('count', 'desc')
+            ->limit(10)
+            ->get();
+
+        $screenSizes = DB::table('page_views')
+            ->where('website_id', $website->id)
+            ->select(DB::raw('screen_size as value'), DB::raw('count(*) as count'))
+            ->groupBy('value')
+            ->orderBy('count', 'desc')
+            ->limit(10)
+            ->get();
+
         return Inertia::render('websites/show', WebsiteShowData::from([
-            'website' => $website,
+            'website' => WebsiteData::from($website),
             'chart' => $chart,
             'liveSessionCount' => $liveSessionCount,
             'sessionCount' => $sessionCount,
             'pageviewCount' => $pageViewCount,
-            'pageviews' => PageViewData::collection(
-                $website->pageviews()->latest()->limit(50)->get()
-            ),
+            'paths' => RollupData::collection($paths),
+            'countries' => RollupData::collection($countries),
+            'screenSizes' => RollupData::collection($screenSizes),
         ]));
     }
 }
