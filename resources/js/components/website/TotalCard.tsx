@@ -1,4 +1,5 @@
 interface TotalCardProps {
+    label: string;
     count: number;
 }
 
@@ -8,11 +9,11 @@ function formattedNumber(number: number) {
     return numberFormat.format(number);
 }
 
-export default function ({ count }: TotalCardProps) {
+export default function ({ label, count }: TotalCardProps) {
     return (
         <div>
             <p>
-                <span className="block text-3xl">{formattedNumber(count)}</span> Live Sessions
+                <span className="block text-3xl">{formattedNumber(count)}</span> {label}
             </p>
         </div>
     );

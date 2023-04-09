@@ -33,9 +33,9 @@ export default function ({
                 <h1>{website.domain}</h1>
 
                 <div className="flex items-center space-x-12">
-                    <TotalCard count={liveSessionCount} />
-                    <TotalCard count={sessionCount} />
-                    <TotalCard count={pageviewCount} />
+                    <TotalCard label="Live Sessions" count={liveSessionCount} />
+                    <TotalCard label="Sessions" count={sessionCount} />
+                    <TotalCard label="Pageviews" count={pageviewCount} />
                 </div>
 
                 <ActivityChart chart={chart} />
