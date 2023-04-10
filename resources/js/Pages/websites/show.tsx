@@ -2,6 +2,7 @@ import { Head } from "@inertiajs/react";
 import RollupCard from "../../components/website/RollupCard";
 import TotalCard from "../../components/website/TotalCard";
 import ActivityChart from "../../components/website/ActivityChart";
+import { ParentSize } from "@visx/responsive";
 
 interface PageProps {
     website: App.Data.WebsiteData;
@@ -38,7 +39,11 @@ export default function ({
                     <TotalCard label="Pageviews" count={pageviewCount} />
                 </div>
 
-                <ActivityChart chart={chart} />
+                <div className="h-36">
+                    <ParentSize>
+                        {({ width, height }) => <ActivityChart width={width} height={height} chart={chart} />}
+                    </ParentSize>
+                </div>
 
                 <RollupCard label="Path" items={paths} />
                 <RollupCard label="Country" items={countries} />
