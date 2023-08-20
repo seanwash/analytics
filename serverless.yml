@@ -8,6 +8,7 @@ provider:
       APP_ENV: production # Or use ${sls:stage} if you want the environment to match the stage
       ASSET_URL: ${construct:website.url}
       # https://us-west-1.console.aws.amazon.com/systems-manager/parameters/?region=us-west-1&tab=Table
+      APP_KEY: bref-ssm:/seanwash-analytics-prod/app-key
       DB_HOST: bref-ssm:/seanwash-analytics-prod/db-host
       DB_DATABASE: bref-ssm:/seanwash-analytics-prod/db-database
       DB_USERNAME: bref-ssm:/seanwash-analytics-prod/db-username

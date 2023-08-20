@@ -1,0 +1,23 @@
+name: Deploy Prod
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - uses: shivammathur/setup-php@master
+        with:
+          php-version: 8.2
+      - name: Install Serverless Framework
+        run: npm install -g serverless
+      - name: Serverless AWS authentication
+        run: sls config credentials --provider aws --key ${{ secrets.AWS_KEY }} --secret ${{ secrets.AWS_SECRET }}
+      - name: Create env file
+        run: cp .env.cd .env
+      - run: chmod +x deploy.sh
+      - name: Deploy
+        run: ./deploy.sh

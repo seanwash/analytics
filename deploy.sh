@@ -4,6 +4,7 @@ composer install --prefer-dist --optimize-autoloader --no-dev
 # Perform extra tasks for your framework of choice
 # (e.g. generate the framework cache)
 # [...]
+npm install
 npm run build
 
 # We do not want to deploy "dev" caches that were generated on our machine
