@@ -1,23 +1,60 @@
-service: app
+service: seanwash-analytics
 
 provider:
     name: aws
-    region: us-east-1
+    region: us-west-1
+    stage: prod
+    environment:
+      APP_ENV: production # Or use ${sls:stage} if you want the environment to match the stage
+      ASSET_URL: ${construct:website.url}
+      # https://us-west-1.console.aws.amazon.com/systems-manager/parameters/?region=us-west-1&tab=Table
+      DB_HOST: bref-ssm:/seanwash-analytics-prod/db-host
+      DB_DATABASE: bref-ssm:/seanwash-analytics-prod/db-database
+      DB_USERNAME: bref-ssm:/seanwash-analytics-prod/db-username
+      DB_PASSWORD: bref-ssm:/seanwash-analytics-prod/db-password
+    iam:
+      role:
+        statements:
+          - Effect: Allow
+            Action: ssm:GetParameters
+            Resource: 'arn:aws:ssm:${aws:region}:${aws:accountId}:parameter/seanwash-analytics-*'
 
-plugins:
-    - ./vendor/bref/bref
+package:
+  # Files and directories to exclude from deployment
+  patterns:
+    - '!node_modules/**'
+    - '!public/storage'
+    - '!resources/assets/**'
+    - '!storage/**'
+    - '!tests/**'
 
 functions:
-    api:
-        handler: index.php
-        description: ''
-        runtime: php-82-fpm
-        timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
-        events:
-            -   httpApi: '*'
+  web:
+    handler: public/index.php
+    runtime: php-82-fpm
+    timeout: 28 # in seconds (API Gateway has a timeout of 29 seconds)
+    events:
+      - httpApi: '*'
+      - schedule:
+          rate: rate(5 minutes)
+          input:
+              warmer: true
 
-# Exclude files from deployment
-package:
-    patterns:
-        - '!node_modules/**'
-        - '!tests/**'
+  artisan:
+    handler: artisan
+    runtime: php-82-console
+    timeout: 720 # in seconds
+
+plugins:
+  - ./vendor/bref/bref
+  - serverless-lift
+
+constructs:
+  website:
+    type: server-side-website
+    assets:
+      '/build/assets/*': public/build/assets
+      '/favicon.ico': public/favicon.ico
+      '/robots.txt': public/robots.txt
+      '/tracker.js': public/tracker.js
+      # add here any file or directory that needs to be served from S3
