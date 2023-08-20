@@ -54,7 +54,7 @@ constructs:
   website:
     type: server-side-website
     assets:
-      '/build/assets/*': public/build/assets
+      '/build/*': public/build
       '/favicon.ico': public/favicon.ico
       '/robots.txt': public/robots.txt
       '/tracker.js': public/tracker.js
