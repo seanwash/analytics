@@ -44,7 +44,7 @@ functions:
   artisan:
     handler: artisan
     runtime: php-82-console
-    timeout: 720 # in seconds
+    timeout: 720 # in seconds, 12 minutes
 
 plugins:
   - ./vendor/bref/bref
