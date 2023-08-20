@@ -4,9 +4,9 @@ import { Head, Link } from "@inertiajs/react";
 export default function () {
     return (
         <>
-            <Head title="Stonks." />
+            <Head title="Analytics." />
 
-            <Link href={route("websites.index")}>Stonks.</Link>
+            <Link href={route("websites.index")}>Analytics.</Link>
         </>
     );
 }
