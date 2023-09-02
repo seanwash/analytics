@@ -9,7 +9,9 @@ const appName = window.document.getElementsByTagName("title")[0]?.innerText || "
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
 
-    resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob("./pages/**/*.tsx")),
+    resolve: (name) => {
+        return resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob("./pages/**/*.tsx"));
+    },
 
     setup({ el, App, props }) {
         createRoot(el).render(<App {...props} />);
