@@ -5,7 +5,6 @@ namespace App\Data;
 use Carbon\Carbon;
 use Spatie\LaravelData\Data;
 
-/** @typescript */
 class PageViewData extends Data
 {
     public function __construct(

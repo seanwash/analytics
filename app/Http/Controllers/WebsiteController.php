@@ -4,18 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Data\RollupData;
 use App\Data\WebsiteData;
-use App\Data\WebsiteShowData;
 use App\Models\Website;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\DB;
-use Inertia\Inertia;
 
 class WebsiteController extends Controller
 {
     public function index()
     {
-        return Inertia::render('websites/index', [
+        return view('websites/index', [
             'websites' => WebsiteData::collection(Website::all()),
         ]);
     }
@@ -79,7 +77,7 @@ class WebsiteController extends Controller
             ->limit(10)
             ->get();
 
-        return Inertia::render('websites/show', WebsiteShowData::from([
+        return view('websites/show', [
             'website' => WebsiteData::from($website),
             'chart' => $chart,
             'liveSessionCount' => $liveSessionCount,
@@ -88,6 +86,6 @@ class WebsiteController extends Controller
             'paths' => RollupData::collection($paths),
             'countries' => RollupData::collection($countries),
             'screenSizes' => RollupData::collection($screenSizes),
-        ]));
+        ]);
     }
 }

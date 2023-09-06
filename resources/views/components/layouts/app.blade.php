@@ -8,18 +8,13 @@
 
         <x-favicon />
 
-        @routes
-        @vite(['resources/css/app.css', 'resources/js/app.tsx'])
-
-        @inertiaHead
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="
         min-h-screen p-8
         bg-gradient-to-b from-white to-slate-200 text-black
         dark:from-slate-600 dark:to-slate-900 dark:text-white
     ">
-        @inertia
-
-        <div id="app"></div>
+        {{ $slot }}
     </body>
 </html>

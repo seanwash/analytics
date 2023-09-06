@@ -5,7 +5,6 @@ namespace App\Data;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
-/** @typescript */
 class WebsiteShowData extends Data
 {
     public function __construct(
